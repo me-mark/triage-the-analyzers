@@ -40,7 +40,7 @@ public class StudentSecurityService {
     public boolean isCurrentUserInstructorOfStudentSection(Integer studentId) {
         Integer instructorIdFromJwt = this.userUtils.getUserId();
         Student student = this.studentRepository.findById(studentId).orElse(null);
-        if (student == null) {
+        if (student == null) { // NOPMD - Keep the missing-student denial explicit before traversing the section.
             return false;
         }
         return student.getSection().getInstructors().stream()

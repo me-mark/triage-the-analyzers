@@ -7,4 +7,11 @@
 
      Unlike the baseline, this file may grow, but every entry is a reviewed decision. -->
 <FindBugsFilter>
+  <!-- D1: JPA entities such as Section share managed links and collections with their
+       association helpers. Services and controllers retain the Spring-managed instances
+       supplied by constructor injection. DTOs such as SectionDto carry the data assembled
+       by converters for a request. Require copies in review when a value must own its data. -->
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+  </Match>
 </FindBugsFilter>

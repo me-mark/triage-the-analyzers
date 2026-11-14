@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- PMD rules for Project Pulse: PMD's quickstart set, minus the rules the team has decided not to
      enforce. To drop a rule, add an exclude inside the quickstart reference, with a comment giving
-     the reason, for example:
-
-       <exclude name="ControlStatementBraces"/>
+     the reason.
 
      To add a rule from outside quickstart, add its own <rule ref="category/java/..."/> line.
      Every change here is a reviewed decision. -->
@@ -13,5 +11,14 @@
          xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
     <description>PMD quickstart, with Project Pulse's decisions.</description>
     <rule ref="rulesets/java/quickstart.xml">
+        <!-- D2: Explicit no-arg constructors make framework construction visible and stable
+             when an application constructor is added. Activity needs its separate JPA
+             constructor, and Comment can keep the same convention with one constructor. -->
+        <exclude name="UncommentedEmptyConstructor"/>
+        <exclude name="UnnecessaryConstructor"/>
+        <!-- D4: The flagged parameterized calls use reads such as templates.size() and
+             result.sent(). The other calls run during authentication or reminder error
+             handling. Check genuinely expensive argument evaluation in review. -->
+        <exclude name="GuardLogStatement"/>
     </rule>
 </ruleset>
